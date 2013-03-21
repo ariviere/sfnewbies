@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+	<div class="span6">
+		<h1 class="center"><%= @place.name %></h1>
+		<br />
+
+		<p>
+	  	<b>Catégorie :</b>
+	  	<%= @place.category.name %>
+		</p>
+		<br />
+
+		<p>
+	  	<b>Description:</b>
+	  	<%= @place.description %>
+		</p>
+	</div>
+	
+	<div class="span6">
+		<%= image_tag(@place.image, :alt => @place.name, :class => "featurette-image pull-right cadre-image") %>
+	</div>
+</div>
+
+<br />
+<br />
+
+<div class="row">
+	<div class="span12">
+		<%= gmaps("markers" => {"data" => @json}) %>
+	</div>
+</div>
+
+<br />
+
+<h3>Commentaires</h3>
+<% @place.comments.each do |comment| %>
+	<p><strong>Par <%= comment.user.name %></strong> le <em><%= comment.updated_at %></em></p>
+	<p><%= comment.content %></p>
+	<br />
+<% end %>
+
+<%= render 'shared/comment_form', place: @place %>
+
+
+<%= link_to 'Edit', edit_place_path(@place) %> |
+<%= link_to 'Back', places_path %>
