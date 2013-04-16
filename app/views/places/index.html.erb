@@ -23,8 +23,10 @@
     <td><%= place.description %></td>
     <td><%= place.category.name %></td>
     <td><%= link_to 'Show', place %></td>
+		<% if(user_signed_in?)  %>
     <td><%= link_to 'Edit', edit_place_path(place) %></td>
     <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<% end %>
   </tr>
 <% end %>
 </table>
@@ -34,5 +36,6 @@
 
 <%= gmaps("markers" => {"data" => @json}) %>
 <br />
-
+<% if(user_signed_in?)  %>
 <%= link_to 'New Place', new_place_path %>
+<% end %>

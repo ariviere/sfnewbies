@@ -1,11 +1,11 @@
 class PlacesController < ApplicationController
   # GET /places
   # GET /places.json  
-  before_filter :authenticate_user!, only: [:new, :create, :update, :destroy]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @places = Place.all
-    @json = Place.all.to_gmaps4rails
+    @json = @places.to_gmaps4rails
     
     respond_to do |format|
       format.html # index.html.erb

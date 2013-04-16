@@ -40,8 +40,11 @@
 	<br />
 <% end %>
 
+<% if(user_signed_in?)  %>
 <%= render 'shared/comment_form', place: @place %>
-
-
 <%= link_to 'Edit', edit_place_path(@place) %> |
+<% else %>
+<p>Vous devez vous <%= link_to 'connecter', new_user_session_path %> pour commenter</p>
+<% end %>
+
 <%= link_to 'Back', places_path %>
