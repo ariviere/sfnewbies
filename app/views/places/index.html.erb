@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th colspan=2>Name</th>
+    <th></th>
     <th>Location</th>
     <th>Description</th>
     <th>Catégorie</th>
@@ -19,6 +20,7 @@
 		<% end  %>
 	</td>
 		<td><%= place.name %></td>
+		<td>(<%= place.comments.count %>)</td>
     <td><%= place.location %></td>
     <td><%= place.description %></td>
     <td><%= place.category.name %></td>
