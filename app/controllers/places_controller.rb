@@ -1,8 +1,20 @@
 class PlacesController < ApplicationController
   # GET /places
   # GET /places.json  
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-
+  before_filter :authenticate_admin, only: [:new, :create, :edit, :update, :destroy]
+  
+  def authenticate_admin
+    if !user_signed_in? 
+      redirect_to new_user_session_path, flash: { error: "Vous devez vous connecter" }
+      return
+    end
+    
+    if !current_user.try(:admin?)
+      redirect_to places_path, flash: { error: "Vous n'avez pas les droits suffisants" }
+      return
+    end
+  end
+         
   def index
     @places = Place.all
     @json = @places.to_gmaps4rails
@@ -85,4 +97,5 @@ class PlacesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end
