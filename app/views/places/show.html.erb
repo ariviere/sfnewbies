@@ -34,9 +34,13 @@
 <br />
 
 <h3>Commentaires</h3>
+<% if (@place.comments.count == 0) %>
+<p>Soyez le premier à laisser un commentaire sur ce lieu !</p>
+<% end %>
 <% @place.comments.each do |comment| %>
 	<p><strong>Par <%= comment.user.name %></strong> le <em><%= comment.updated_at %></em></p>
 	<p><%= comment.content %></p>
+	<p><%= link_to 'Destroy', place_comment_path(@place, comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 	<br />
 <% end %>
 

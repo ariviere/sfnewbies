@@ -1,7 +1,19 @@
 class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
-  before_filter :authenticate_user!
+  before_filter :authenticate_admin
+  
+  def authenticate_admin
+    if !user_signed_in? 
+      redirect_to new_user_session_path, flash: { error: "Vous devez vous connecter" }
+      return
+    end
+    
+    if !current_user.try(:admin?)
+      redirect_to places_path, flash: { error: "Vous n'avez pas les droits suffisants" }
+      return
+    end
+  end
   
   def index
     @categories = Category.all
