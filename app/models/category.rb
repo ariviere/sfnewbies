@@ -10,6 +10,6 @@
 #
 
 class Category < ActiveRecord::Base
-  attr_accessible :description, :name
+  attr_accessible :description, :name, :identity
   has_many :places
 end

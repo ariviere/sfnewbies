@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     
     if @comment.save
-       flash[:success] = "Comment created!"
+       flash[:notice] = "Comment created!"
        redirect_to @place
     else
       render 'shared/_comment_form'
