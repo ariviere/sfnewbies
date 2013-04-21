@@ -1,38 +1,6 @@
 <h1>Where to go ?!</h1>
 
-<table>
-  <tr>
-    <th colspan=2>Name</th>
-    <th></th>
-    <th>Location</th>
-    <th>Description</th>
-    <th>Catégorie</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @places.each do |place| %>
-  <tr>
-		<td>
-		<% if(place.image?) %>
-			<%= image_tag(place.image.thumb, :alt => place.name) %>
-		<% end  %>
-	</td>
-		<td><%= place.name %></td>
-		<td>(<%= place.comments.count %>)</td>
-    <td><%= place.location %></td>
-    <td><%= place.description %></td>
-    <td><%= place.category.name %></td>
-    <td><%= link_to 'Show', place %></td>
-		<% if(current_user.try(:admin?))  %>
-    <td><%= link_to 'Edit', edit_place_path(place) %></td>
-    <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		<% end %>
-  </tr>
-<% end %>
-</table>
-
+<%= gmaps("markers" => {"data" => @json}) %>
 <br />
 
 <%= form_for(filter_places_path, url: filter_places_path) do %>
@@ -41,8 +9,7 @@
 <% end %>
 
 <br />
-<%= gmaps("markers" => {"data" => @json}) %>
-<br />
+
 <% if(current_user.try(:admin?))  %>
 <%= link_to 'New Place', new_place_path %>
 <% end %>

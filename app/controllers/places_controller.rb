@@ -29,7 +29,17 @@ class PlacesController < ApplicationController
   
   def index
     @places = Place.all
-    @json = @places.to_gmaps4rails
+    #@json = @places.to_gmaps4rails
+    @json = @places.to_gmaps4rails do |place, marker|
+      marker.infowindow render_to_string(:partial => "infowindow", :locals => { :place => place})
+      marker.picture({
+                      :picture  => "/assets/map_icons/#{place.category.identity}.png",
+                      :width    => 32,
+                      :height   => 37
+                     })
+      marker.title   place.name
+      marker.json({ :id => place.id })
+    end
   end
 
   # GET /places/1

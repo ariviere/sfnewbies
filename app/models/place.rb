@@ -28,16 +28,16 @@ class Place < ActiveRecord::Base
     "#{self.location}, San Francisco, United States" 
   end
   
-  def gmaps4rails_infowindow
-    "#{self.name}"
-  end
+  #def gmaps4rails_infowindow
+  #  "#{self.name}"
+  #end
   
-  def gmaps4rails_marker_picture
-    {
-     "picture" => "/assets/map_icons/#{self.category.identity}.png",
-     "width" => 32,
-     "height" => 37,
-    }
-  end
+  #def gmaps4rails_marker_picture
+  #  {
+  #   "picture" => "/assets/map_icons/#{self.category.identity}.png",
+  #   "width" => 32,
+  #   "height" => 37,
+  #  }
+  #end
   
 end

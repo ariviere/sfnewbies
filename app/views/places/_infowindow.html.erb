@@ -1,0 +1,3 @@
+<%= image_tag(place.image.thumb, :alt => place.name, :class => "pull-left cadre-image") %>
+<p><b><%= link_to place.name, place %></b><br /> <%= "#{pluralize(place.comments.count, 'commentaire', 'commentaires')}" %>
+<%= place.description %></p>
