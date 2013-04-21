@@ -14,15 +14,22 @@ class PlacesController < ApplicationController
       return
     end
   end
-         
+  
+  def filter
+    @filtered_cat = params[:filter][:cat]
+    if(@filtered_cat.empty?)
+      @places = Place.all
+    else
+      @places = Place.where(category_id: @filtered_cat)
+    end
+    @json = @places.to_gmaps4rails
+    render :index
+    
+  end
+  
   def index
     @places = Place.all
     @json = @places.to_gmaps4rails
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @places }
-    end
   end
 
   # GET /places/1

@@ -1,0 +1,2 @@
+$('div#categories').append("<%= escape_javascript(render @category) %>");
+$('div#<%= dom_id(@category) %>').effect('highlight');

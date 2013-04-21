@@ -12,4 +12,9 @@
 class Category < ActiveRecord::Base
   attr_accessible :description, :name, :identity
   has_many :places
+  
+  
+  def self.normalize(name)
+    name.downcase.delete(' ')
+  end
 end

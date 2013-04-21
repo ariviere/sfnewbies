@@ -5,6 +5,9 @@ Supsf::Application.routes.draw do
 
   resources :places do
     resources :comments
+    collection do
+      post 'filter' => 'places#filter'
+    end
   end
    
   root :to => "places#index"

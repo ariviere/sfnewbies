@@ -1,4 +1,4 @@
-<h1>Listing places</h1>
+<h1>Where to go ?!</h1>
 
 <table>
   <tr>
@@ -33,11 +33,16 @@
 <% end %>
 </table>
 
-
 <br />
 
+<%= form_for(filter_places_path, url: filter_places_path) do %>
+	<p><%= collection_select :filter, :cat, Category.all, :id, :name, selected: @filtered_cat, include_blank: 'Tout' %>
+	<%= submit_tag "Filtrer" %></p>
+<% end %>
+
+<br />
 <%= gmaps("markers" => {"data" => @json}) %>
 <br />
-<% if(user_signed_in?)  %>
+<% if(current_user.try(:admin?))  %>
 <%= link_to 'New Place', new_place_path %>
 <% end %>
