@@ -1,11 +1,13 @@
-<h1>Where to go ?!</h1>
+<h1 class="text-center">San Francisco Places</h1>
 
 <%= gmaps("markers" => {"data" => @json}) %>
 <br />
 
 <%= form_for(filter_places_path, url: filter_places_path) do %>
-	<p><%= collection_select :filter, :cat, Category.all, :id, :name, selected: @filtered_cat, include_blank: 'Tout' %>
-	<%= submit_tag "Filtrer" %></p>
+	<div class="input-append">
+		<%= collection_select :filter, :cat, Category.all, :id, :name, selected: @filtered_cat, include_blank: 'Tout' %>
+		<%= submit_tag "Filtrer", class: "btn btn-primary" %>
+	</div>
 <% end %>
 
 <br />
