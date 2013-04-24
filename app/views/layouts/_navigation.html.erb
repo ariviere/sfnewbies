@@ -21,7 +21,10 @@
   <% end %>
 	<% if current_user.try(:admin?) %>
 		<li>
-		<%= link_to('Catégories', categories_path) %>
+			<%= link_to('Catégories', categories_path) %>
+		</li>
+		<li>
+			<%= link_to('Nouveau lieu', new_place_path) %>
 		</li>
 	<% end %>
 </ul>

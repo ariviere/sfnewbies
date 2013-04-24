@@ -9,9 +9,3 @@
 		<%= submit_tag "Filtrer", class: "btn btn-primary" %>
 	</div>
 <% end %>
-
-<br />
-
-<% if(current_user.try(:admin?))  %>
-<%= link_to 'New Place', new_place_path %>
-<% end %>
