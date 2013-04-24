@@ -11,7 +11,7 @@
 
 class Category < ActiveRecord::Base
   attr_accessible :description, :name, :identity
-  has_many :places
+  has_many :places, dependent: :destroy
   
   
   def self.normalize(name)

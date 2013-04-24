@@ -22,7 +22,7 @@ class PlacesController < ApplicationController
     else
       @places = Place.where(category_id: @filtered_cat)
     end
-    @json = @places.to_gmaps4rails
+    @json = define_json(@places)
     render :index
     
   end
@@ -30,16 +30,7 @@ class PlacesController < ApplicationController
   def index
     @places = Place.all
     #@json = @places.to_gmaps4rails
-    @json = @places.to_gmaps4rails do |place, marker|
-      marker.infowindow render_to_string(:partial => "infowindow", :locals => { :place => place})
-      marker.picture({
-                      :picture  => "/assets/map_icons/#{place.category.identity}.png",
-                      :width    => 32,
-                      :height   => 37
-                     })
-      marker.title   place.name
-      marker.json({ :id => place.id })
-    end
+    @json = define_json(@places)
   end
 
   # GET /places/1
@@ -115,4 +106,18 @@ class PlacesController < ApplicationController
     end
   end
   
+  private
+  
+  def define_json(places)
+    places.to_gmaps4rails do |place, marker|
+      marker.infowindow render_to_string(:partial => "infowindow", :locals => { :place => place})
+      marker.picture({
+                      :picture  => "/assets/map_icons/#{place.category.identity}.png",
+                      :width    => 32,
+                      :height   => 37
+                     })
+      marker.title   place.name
+      marker.json({ :id => place.id })
+    end
+  end
 end
